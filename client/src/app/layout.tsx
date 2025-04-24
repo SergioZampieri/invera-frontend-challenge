@@ -1,6 +1,7 @@
+import './globals.css';
+import { AppProvider } from '@/providers/providers';
 import type { Metadata } from 'next';
 import { Sora } from 'next/font/google';
-import './globals.css';
 import React from 'react';
 
 const sora = Sora({
@@ -17,7 +18,9 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang='en'>
-      <body className={`${sora.className} antialiased`}>{children}</body>
+      <body className={`${sora.className} antialiased`}>
+        <AppProvider>{children}</AppProvider>
+      </body>
     </html>
   );
 }
