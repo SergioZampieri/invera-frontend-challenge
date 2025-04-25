@@ -1,3 +1,5 @@
+"use client"
+
 import { UserForm } from '../form';
 import { DialogDescription, DialogHeader, Dialog, DialogContent, DialogTitle } from '@/components/ui/dialog';
 import { User } from '@/types';

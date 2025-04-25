@@ -1,14 +1,12 @@
 TODO: 
-- el grafico esta al reves y el tooltip se muetra al hacer hover sobre la radialBar fantasma
-- los skeletons estan mal, hay que mostrarlos cuando se hace loading, mostrar mensajes de error cuando falla la consulta y mostrar "sin datos" cuando los datos son vacios.
-- el diseño podria mejorar, hay componentes que pueden ser movidos a una carpeta "shared" o "common" como la tabla. se podrian hacer mas componentes genericos como cards, labels, botones, layouts.
-- la tabla necesita modularizarce, intente con useRefs para fowardear las funciones de la tabla pero no pude hacerlo.
-- en la tabla decidi eliminar los iconos por falta de espacio, tal vez haya alguna mejor estrategia para hacer que el uso del mismo sea mas eficiente.
-- hay algunas variables o tipos que podrian mejorar los nombres, como "UserType".
-- faltan definir algunos barrel imports
-- falta hacer testing
-- falta implementar las notificaciones
-
+- El gráfico está al revés y el tooltip se muestra al hacer hover sobre la radialBar fantasma.
+- Los skeletons están mal; deben mostrarse cuando se está cargando (loading), mostrar mensajes de error cuando falla la consulta y mostrar "sin datos" cuando los datos están vacíos.
+- El diseño podría mejorar. Hay componentes que pueden moverse a una carpeta "shared" o "common", como la tabla. También se podrían crear más componentes genéricos, como cards, etiquetas (labels), botones y layouts.
+- La tabla necesita modularizarse. Intenté usar useRefs para forwardear las funciones de la tabla, pero no pude hacerlo.
+- En la tabla decidí eliminar los íconos por falta de espacio; tal vez haya una mejor estrategia para optimizar su uso.
+- Algunas variables o tipos podrían tener mejores nombres, como "UserType".
+- Faltan definir algunos barrel imports.
+- Falta realizar pruebas (testing).
 # Invera Frontend Challenge
 
 Este repositorio contiene un servidor mock con una API para desarrollar el challenge de Frontend según el diseño proporcionado.

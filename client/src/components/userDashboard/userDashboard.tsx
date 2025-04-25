@@ -1,16 +1,17 @@
-// import { UserCardContainer, UserCardContainerSkeleton } from "./userCards";
+"use client"
 
-// const statisticsData = undefined
-// export function UserDashBoard() {
-//   return (
-//     <div className='flex flex-col gap-8 mx-4 my-8 md:m-12 lg:mx-10'>
-      
-//       { statisticsData ? 
-//         <UserCardContainer statistics={statisticsData}/>
-//         :
-//         <UserCardContainerSkeleton/>
-//       }
-        
-//     </div>
-//   );
-// }
+import { UserCards } from '@/components/userDashboard/userCards/userCards';
+import { UserChart } from '@/components/userDashboard/userChart';
+import { UserHeader } from '@/components/userDashboard/userHeader';
+import { UserTable } from '@/components/userDashboard/userTable';
+
+export default function UserDashboard() {
+  return (
+    <>
+      <UserHeader />
+      <UserCards />
+      <UserChart />
+      <UserTable />
+    </>
+  );
+}

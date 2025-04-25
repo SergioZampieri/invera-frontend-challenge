@@ -14,8 +14,6 @@ interface ColumnsProps {
   deleteUser: (user: User) => void;
 }
 
-
-//export const columns: ColumnDef<User>[] = [
 export const columns = ({ editUser, deleteUser }: ColumnsProps): ColumnDef<User>[] => [
   {
     id: 'select',

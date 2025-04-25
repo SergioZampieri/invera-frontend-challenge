@@ -5,7 +5,6 @@ import { FormControl, FormField, FormItem, FormLabel, FormMessage, Form } from '
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { useCreateUser, useUpdateUser } from '@/hooks/useUsers';
 import { User } from '@/types';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -21,8 +20,8 @@ interface UserFormProps {
 }
 
 export const UserForm = ({ data, isEditing, closeAction }: UserFormProps) => {
-  const { mutate : create, isError: errorCreate, isPending: pendingCreate } = useCreateUser();
-  const { mutate: edit, isSuccess: sucessEdit, isError: errorEdit, isPending: pendingEdit } = useUpdateUser();
+  const { mutate : create} = useCreateUser();
+  const { mutate: edit } = useUpdateUser();
 
   type UserFormValues = z.infer<typeof userSchema>;
 
