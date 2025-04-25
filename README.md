@@ -3,8 +3,11 @@ TODO:
 - los skeletons estan mal, hay que mostrarlos cuando se hace loading, mostrar mensajes de error cuando falla la consulta y mostrar "sin datos" cuando los datos son vacios.
 - el diseño podria mejorar, hay componentes que pueden ser movidos a una carpeta "shared" o "common" como la tabla. se podrian hacer mas componentes genericos como cards, labels, botones, layouts.
 - la tabla necesita modularizarce, intente con useRefs para fowardear las funciones de la tabla pero no pude hacerlo.
-
-
+- en la tabla decidi eliminar los iconos por falta de espacio, tal vez haya alguna mejor estrategia para hacer que el uso del mismo sea mas eficiente.
+- hay algunas variables o tipos que podrian mejorar los nombres, como "UserType".
+- faltan definir algunos barrel imports
+- falta hacer testing
+- falta implementar las notificaciones
 
 # Invera Frontend Challenge
 

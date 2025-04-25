@@ -1,32 +1,36 @@
-import { Heart, OtherUsers, User, Users } from '@/components/iconography';
-import { Statistics } from '@/types';
+'use client';
+
 import { UserCard } from './userCard';
+import { Heart, OtherUsers, User, Users } from '@/components/iconography';
 
-interface StatCardsProps {
-  statistics: Statistics;
-}
+import { UserCardsSkeleton } from './userCardsSkeleton';
+import { useStatistics } from '@/hooks/useStatistic';
 
-export function UserCards({ statistics }: StatCardsProps) {
+export function UserCards() {
+  const { data, isLoading } = useStatistics();
+
+  if (isLoading) return <UserCardsSkeleton cardsToRender={4}/>
+
   const stats = [
     {
       title: 'Total Users',
       icon: <Users />,
-      value: statistics.totalUsers
+      value: data?.totalUsers ?? undefined
     },
     {
       title: 'New Users',
       icon: <User />,
-      value: statistics.newUsers
+      value: data?.newUsers ?? undefined
     },
     {
       title: 'Top Users',
       icon: <Heart />,
-      value: statistics.topUsers
+      value: data?.topUsers ?? undefined
     },
     {
       title: 'Other Users',
       icon: <OtherUsers />,
-      value: statistics.otherUsers
+      value: data?.otherUsers ?? undefined
     }
   ];
 
@@ -36,7 +40,7 @@ export function UserCards({ statistics }: StatCardsProps) {
         <UserCard
           title={stat.title}
           icon={stat.icon}
-          value={stat.value}
+          value={stat.value!}
           key={index}
         />
       ))}

@@ -1,15 +1,18 @@
 'use client';
 
 import { Button } from '@/components/ui/button';
-import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
+import { FormControl, FormField, FormItem, FormLabel, FormMessage, Form } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { useCreateUser, useUpdateUser } from '@/hooks/useUsers';
 import { User } from '@/types';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useEffect } from 'react';
-import { Form, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
+import { toast } from 'sonner';
 import { z } from 'zod';
-
 
 interface UserFormProps {
   closeAction: () => void;
@@ -17,18 +20,21 @@ interface UserFormProps {
   data?: User;
 }
 
-type UserFormValues = z.infer<typeof userSchema>;
-
-const userSchema = z.object({
-  name: z.string().min(2, 'At least 2 characters are needed'), //"Yu" o "A.""
-  email: z.string().email('Invalid email'),
-  phone: z.string().min(10, 'Must be a valid phone number').max(14,"Must be a valid phone number"),
-  location: z.string().min(4, 'At least 4 characters are needed').max(32, "Max characters exceeded"), //Chad es uno de los nombres mas cortos, Saint Vincent and the Grenadines el mas largo  :)
-  company: z.string().min(1, 'Field is empty'),
-  status: z.enum(['Online', 'Offline'])
-});
-
 export const UserForm = ({ data, isEditing, closeAction }: UserFormProps) => {
+  const { mutate : create, isError: errorCreate, isPending: pendingCreate } = useCreateUser();
+  const { mutate: edit, isSuccess: sucessEdit, isError: errorEdit, isPending: pendingEdit } = useUpdateUser();
+
+  type UserFormValues = z.infer<typeof userSchema>;
+
+  const userSchema = z.object({
+    name: z.string().min(2, 'At least 2 characters are needed'), //"Yu" o "A.""
+    email: z.string().email('Invalid email'),
+    phone: z.string().min(10, 'Must be a valid phone number').max(14, 'Must be a valid phone number'),
+    location: z.string().min(4, 'At least 4 characters are needed').max(32, 'Max characters exceeded'), //Chad es uno de los nombres mas cortos, Saint Vincent and the Grenadines el mas largo  :)
+    company: z.string().min(1, 'Field is empty'),
+    status: z.enum(['Online', 'Offline'])
+  });
+
   const form = useForm<UserFormValues>({
     resolver: zodResolver(userSchema),
     defaultValues: {
@@ -43,6 +49,7 @@ export const UserForm = ({ data, isEditing, closeAction }: UserFormProps) => {
 
   useEffect(() => {
     if (data && isEditing) {
+      console.log(data);
       form.reset({
         name: data.name,
         email: data.email,
@@ -54,8 +61,33 @@ export const UserForm = ({ data, isEditing, closeAction }: UserFormProps) => {
     }
   }, [data, isEditing, form]);
 
-  const onSubmit = async (data: UserFormValues) => {
-    // const {createUser} = useUsers(); try createUSer(data);
+  const onSubmit = (formData: UserFormValues) => {
+    if (isEditing && data?.id !== undefined) {
+      edit(
+        { id: data.id, data: formData },
+        {
+          onSuccess: () => {
+            form.reset();
+            toast.success('Usuario editado con exito')
+            closeAction();
+          },
+          onError: () => {
+            toast.error('No pudo editarse el usuario')
+          }
+        }
+      );
+    } else {
+      create(formData, {
+        onSuccess: () => {
+          form.reset();
+          toast.success('Usuario creado con exito')
+          closeAction();
+        },
+        onError: () => {
+          toast.error('No pudo crearse el usuario')
+        }
+      });
+    }
   };
 
   return (
@@ -73,7 +105,6 @@ export const UserForm = ({ data, isEditing, closeAction }: UserFormProps) => {
               <FormControl>
                 <Input
                   placeholder='Enter name'
-                  className=''
                   {...field}
                 />
               </FormControl>
@@ -92,7 +123,6 @@ export const UserForm = ({ data, isEditing, closeAction }: UserFormProps) => {
               <FormControl>
                 <Input
                   placeholder='Enter email'
-                  className=''
                   {...field}
                 />
               </FormControl>
@@ -111,7 +141,6 @@ export const UserForm = ({ data, isEditing, closeAction }: UserFormProps) => {
               <FormControl>
                 <Input
                   placeholder='Enter phone number'
-                  className=''
                   {...field}
                 />
               </FormControl>
@@ -130,7 +159,6 @@ export const UserForm = ({ data, isEditing, closeAction }: UserFormProps) => {
               <FormControl>
                 <Input
                   placeholder='Enter location'
-                  className=''
                   {...field}
                 />
               </FormControl>
@@ -149,7 +177,6 @@ export const UserForm = ({ data, isEditing, closeAction }: UserFormProps) => {
               <FormControl>
                 <Input
                   placeholder='Enter company'
-                  className=''
                   {...field}
                 />
               </FormControl>
@@ -157,7 +184,6 @@ export const UserForm = ({ data, isEditing, closeAction }: UserFormProps) => {
             </FormItem>
           )}
         />
-
         {/* campo de estado */}
         <FormField
           control={form.control}
@@ -165,28 +191,27 @@ export const UserForm = ({ data, isEditing, closeAction }: UserFormProps) => {
           render={({ field }) => (
             <FormItem>
               <FormLabel className='text-sm font-medium'>Status</FormLabel>
-              <Select
-                onValueChange={field.onChange}
-                defaultValue={field.value}>
-                <FormControl>
-                  <SelectTrigger className=''>
-                    <SelectValue placeholder='Select status' />
-                  </SelectTrigger>
-                </FormControl>
-                <SelectContent className=''>
-                  <SelectItem
+              <RadioGroup
+                defaultValue={field.value}
+                className='flex items-center gap-12 pl-2 pt-2'
+                onValueChange={field.onChange}>
+                <div className='flex items-center space-x-2'>
+                  <RadioGroupItem
                     value='Online'
-                    className=''>
-                    Online
-                  </SelectItem>
-                  <SelectItem
+                    id='offline'
+                    className='border-green-500 text-green-500 [&_svg]:fill-green-500'
+                  />
+                  <Label htmlFor='color-green'>Online</Label>
+                </div>
+                <div className='flex items-center space-x-2'>
+                  <RadioGroupItem
                     value='Offline'
-                    className=''>
-                    Offline
-                  </SelectItem>
-                </SelectContent>
-              </Select>
-              <FormMessage className='text-xs' />
+                    id='online'
+                    className='border-card-foreground text-card [&_svg]:fill-card-foreground'
+                  />
+                  <Label htmlFor='color-rose'>Offline</Label>
+                </div>
+              </RadioGroup>
             </FormItem>
           )}
         />

@@ -12,12 +12,13 @@ const sora = Sora({
 
 export const metadata: Metadata = {
   title: 'Invera Frontend Challente',
-  description: 'Propuesta de solución al challenge de Invera'
+  description: 'Propuesta de solución al challenge de Invera',
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang='en'>
+      <link rel="icon" href="/favicon.ico" sizes="any" />
       <body className={`${sora.className} antialiased`}>
         <AppProvider>{children}</AppProvider>
       </body>

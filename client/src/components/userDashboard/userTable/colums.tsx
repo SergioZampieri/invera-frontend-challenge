@@ -9,7 +9,14 @@ import { AvatarFallback } from '@radix-ui/react-avatar';
 import { ColumnDef } from '@tanstack/react-table';
 import { ArrowUpDown, Pencil, Trash } from 'lucide-react';
 
-export const columns: ColumnDef<User>[] = [
+interface ColumnsProps {
+  editUser: (user: User) => void;
+  deleteUser: (user: User) => void;
+}
+
+
+//export const columns: ColumnDef<User>[] = [
+export const columns = ({ editUser, deleteUser }: ColumnsProps): ColumnDef<User>[] => [
   {
     id: 'select',
     header: ({ table }) => (
@@ -36,6 +43,7 @@ export const columns: ColumnDef<User>[] = [
     header: ({ column }) => {
       return (
         <Button
+          className='flex px-0'
           variant='ghost'
           onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}>
           Name
@@ -67,7 +75,7 @@ export const columns: ColumnDef<User>[] = [
     header: ({ column }) => {
       return (
         <Button
-          className='hidden w-24 px-0 md:flex lg:px-4'
+          className='hidden w-24 px-0 md:flex'
           variant='ghost'
           onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}>
           Phone
@@ -82,7 +90,7 @@ export const columns: ColumnDef<User>[] = [
     header: ({ column }) => {
       return (
         <Button
-          className='hidden self-start md:flex'
+          className='hidden px-0 md:flex'
           variant='ghost'
           onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}>
           Location
@@ -97,7 +105,7 @@ export const columns: ColumnDef<User>[] = [
     header: ({ column }) => {
       return (
         <Button
-          className='hidden md:flex'
+          className='hidden px-0 md:flex'
           variant='ghost'
           onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}>
           Company
@@ -126,7 +134,7 @@ export const columns: ColumnDef<User>[] = [
     header: ({ column }) => {
       return (
         <Button
-          className='hidden md:flex'
+          className='hidden px-0 md:flex'
           variant='ghost'
           onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}>
           Status
@@ -135,10 +143,10 @@ export const columns: ColumnDef<User>[] = [
       );
     },
     cell: ({ row }) => (
-      <div className='flex items-center space-x-2 px-4'>
+      <div className='items-cente flex md:space-x-2 lg:px-4'>
         {
           <Badge
-            className={`${row.getValue('status') === 'Online' ? 'border border-brand-contrast bg-brand-success text-brand-contrast' : 'bg-muted'} `}
+            className={`${row.getValue('status') === 'Online' ? 'border border-brand-contrast bg-brand-success text-brand-contrast' : 'bg-muted'} px-1 py-1 md:px-2`}
             variant='outline'>
             ● {row.getValue('status')}
           </Badge>
@@ -155,14 +163,14 @@ export const columns: ColumnDef<User>[] = [
         <div className='flex justify-end pr-4'>
           <Button
             variant='ghost'
-            className='size-8 hover:bg-brand-primary-muted'
-            onClick={() => console.log(user)}>
+            className='hover:bg-brand-primary-muted size-8'
+            onClick={() => editUser(user)}>
             <Pencil />
           </Button>
           <Button
             variant='ghost'
-            className='size-8 hover:bg-brand-primary-muted'
-            onClick={() => console.log(user)}>
+            className='hover:bg-brand-primary-muted size-8'
+            onClick={() => deleteUser(user)}>
             <Trash />
           </Button>
         </div>

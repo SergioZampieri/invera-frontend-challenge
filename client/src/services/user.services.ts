@@ -10,25 +10,30 @@ export type FetchUsersParams = {
   status?: 'Online' | 'Offline';
 };
 
-export const fetchUsers = async ({
-  page = 1,
-  limit = 10,
-  search = '',
-  sortBy,
-  order,
-  status
-}: FetchUsersParams): Promise<User[]> => {
-  const params: Record<string, string | number> = {
-    _page: page,
-    _limit: limit
-  };
+export const fetchUsers = async (
+//   {
+//   page = 1,
+//   limit = 10,
+//   search = '',
+//   sortBy,
+//   order,
+//   status
+// }: FetchUsersParams
 
-  if (search) params.q = search;
-  if (sortBy) params._sort = sortBy;
-  if (order) params._order = order;
-  if (status) params._status = status;
+): Promise<User[]> => {
+  // const params: Record<string, string | number> = {
+  //   _page: page,
+  //   _limit: limit
+  // };
 
-  const response = await axiosInstance.get<User[]>('/users', { params });
+  // if (search) params.q = search;
+  // if (sortBy) params._sort = sortBy;
+  // if (order) params._order = order;
+  // if (status) params._status = status;
+
+  const response = await axiosInstance.get<User[]>('/users', {
+    //  params 
+    });
   return response.data;
 };
 
