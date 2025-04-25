@@ -12,6 +12,7 @@ const config: Config = {
       colors: {
         brand: {
           primary: '#7B99FF',
+          "primary-muted": '#7B99FF50',
           secondary: '#C9D7FD',
           contrast: '#28E384',
           'text-primary-dark': '#BABABA',

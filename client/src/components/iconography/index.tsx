@@ -4,10 +4,11 @@ interface IconProps {
   className?: string;
 }
 
+// catalogo de iconos custom
 export const User = ({ className }: IconProps): React.ReactNode => {
   return (
     <svg
-      className={cn('fill-brand-text-primary dark:fill-brand-text-primary-dark', className)}
+      className={cn('fill-brand-primary', className)}
       xmlns='http://www.w3.org/2000/svg'
       width='1em'
       height='1em'
@@ -23,7 +24,7 @@ export const User = ({ className }: IconProps): React.ReactNode => {
 export const Users = ({ className }: IconProps): React.ReactNode => {
   return (
     <svg
-      className={cn('fill-brand-text-primary dark:fill-brand-text-primary-dark', className)}
+      className={cn('fill-brand-primary', className)}
       xmlns='http://www.w3.org/2000/svg'
       width='1em'
       height='1em'
@@ -39,7 +40,7 @@ export const Users = ({ className }: IconProps): React.ReactNode => {
 export const Heart = ({ className }: IconProps): React.ReactNode => {
   return (
     <svg
-      className={cn('fill-brand-text-primary dark:fill-brand-text-primary-dark', className)}
+      className={cn('fill-brand-primary', className)}
       xmlns='http://www.w3.org/2000/svg'
       width='1em'
       height='1em'
@@ -55,7 +56,7 @@ export const Heart = ({ className }: IconProps): React.ReactNode => {
 export const OtherUsers = ({ className }: IconProps): React.ReactNode => {
   return (
     <svg
-      className={cn('fill-brand-text-primary dark:fill-brand-text-primary-dark', className)}
+      className={cn('fill-brand-primary', className)}
       xmlns='http://www.w3.org/2000/svg'
       width='1em'
       height='1em'
@@ -71,7 +72,7 @@ export const OtherUsers = ({ className }: IconProps): React.ReactNode => {
 export const KebabVertical = ({ className }: IconProps): React.ReactNode => {
   return (
     <svg
-      className={cn('fill-brand-text-primary dark:fill-brand-text-primary-dark', className)}
+      className={cn('fill-brand-primary', className)}
       xmlns='http://www.w3.org/2000/svg'
       width='1em'
       height='1em'

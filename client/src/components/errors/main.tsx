@@ -1,6 +1,7 @@
 import { Button } from '../ui/button';
 
 export function MainErrorFallback () {
+  // componente de error generico
   return (
     <div
       className="flex h-screen w-screen flex-col items-center justify-center text-red-500"

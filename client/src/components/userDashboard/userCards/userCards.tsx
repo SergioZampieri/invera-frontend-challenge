@@ -31,7 +31,7 @@ export function UserCards({ statistics }: StatCardsProps) {
   ];
 
   return (
-    <div className='flex flex-wrap gap-6 justify-center'>
+    <div className='flex flex-wrap justify-between gap-4'>
       {stats.map((stat, index) => (
         <UserCard
           title={stat.title}

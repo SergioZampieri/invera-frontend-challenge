@@ -1,3 +1,11 @@
+TODO: 
+- el grafico esta al reves y el tooltip se muetra al hacer hover sobre la radialBar fantasma
+- los skeletons estan mal, hay que mostrarlos cuando se hace loading, mostrar mensajes de error cuando falla la consulta y mostrar "sin datos" cuando los datos son vacios.
+- el diseño podria mejorar, hay componentes que pueden ser movidos a una carpeta "shared" o "common" como la tabla. se podrian hacer mas componentes genericos como cards, labels, botones, layouts.
+- la tabla necesita modularizarce, intente con useRefs para fowardear las funciones de la tabla pero no pude hacerlo.
+
+
+
 # Invera Frontend Challenge
 
 Este repositorio contiene un servidor mock con una API para desarrollar el challenge de Frontend según el diseño proporcionado.

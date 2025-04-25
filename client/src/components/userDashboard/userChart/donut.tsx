@@ -1,7 +1,6 @@
 'use client';
 
 import { ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent } from '@/components/ui/chart';
-import { Label } from '@/components/ui/label';
 import { Cell, RadialBar, RadialBarChart } from 'recharts';
 
 const chartData = [
@@ -33,19 +32,20 @@ const chartConfig = {
 } satisfies ChartConfig;
 export function Donut() {
   return (
-    <div className='relative h-[210px] w-[210px]'>
-      <Label className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 max-w-22 text-center text-[1.5rem] font-semibold leading-none text-brand-text-secondary-dark'>
+    <div className='relative h-[320px] w-[320px]'>
+      <p className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 max-w-20 text-center text-3xl font-semibold leading-none text-title-text'>
         150k users
-      </Label>
+      </p>
       <ChartContainer
         config={chartConfig}
         className='w-full h-full'>
         <RadialBarChart
+        
           startAngle={-180}
           endAngle={180}
           data={chartData}
-          innerRadius={85}
-          outerRadius={110}>
+          innerRadius={90}
+          outerRadius={140}>
           <ChartTooltip
             cursor={false}
             content={

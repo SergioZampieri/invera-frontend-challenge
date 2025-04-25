@@ -10,24 +10,24 @@ interface UpsertUserDialogProps {
   userData?: User;
 }
 
-export function UpsertUserDialog({ open, onOpen, userData }: UpsertUserDialogProps) {
+export function UpsertUserDialog({ open, onOpen, userData }: UpsertUserDialogProps) { //UPdate/inSERT DIALOG, permite usarlo para editar y para crear usuarios
   return (
     <Dialog
       open={open}
       onOpenChange={onOpen}>
-      <DialogContent className='border-border bg-brand-background-secondary text-brand-background-primary-dark dark:bg-brand-background-primary-dark dark:text-brand-text-secondary-dark'>
+      <DialogContent className='border-border'>
         <DialogHeader>
-          <DialogTitle className='text-xl font-bold text-brand-text-primary-dark dark:text-brand-text-primary'>
+          <DialogTitle className='text-xl font-bold'>
             {userData ? 'Edit User' : 'Add User'}
           </DialogTitle>
-          <DialogDescription className='text-xl font-bold text-brand-text-primary-dark dark:text-brand-text-primary'>
+          <DialogDescription className='text-xl font-bold'>
             {userData
               ? 'Make changes to the user profile here. Click save when you are done.'
               : 'Create a new user profile'}
           </DialogDescription>
         </DialogHeader>
         <UserForm
-          fetchedData={userData}
+          data={userData}
           closeAction={onOpen}
         />
       </DialogContent>

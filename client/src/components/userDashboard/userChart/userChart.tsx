@@ -1,3 +1,4 @@
+import { Card } from '@/components/ui/card';
 import { Donut } from './donut';
 
 const users = {
@@ -28,7 +29,8 @@ export function UserChart() {
   });
 
   return (
-    <section className='flex flex-col gap-20 rounded-2xl border-brand-border bg-brand-background-primary-dark md:flex-row md:gap-0'>
+    <section className='flex flex-col gap-20 rounded-2xl md:flex-row md:gap-0 border bg-card p-8'>
+      <h2 className='text-title-text text-2xl font-bold'>Statistics</h2>
       <div className='relative flex h-64 items-center justify-center md:w-1/2'>
         <Donut />
       </div>
@@ -36,15 +38,15 @@ export function UserChart() {
         {distributionWithColors.map((element) => (
           <div
             key={element.type}
-            className='flex items-center justify-between'>
+            className='flex items-center justify-between md:max-w-[22rem]'>
             <div className='flex items-center space-x-2'>
               <div
                 className='h-2 w-2 rounded-full'
                 style={{ backgroundColor: element.color }}
               />
-              <span className='text-sm text-brand-text-primary-dark'>{element.type}</span>
+              <span className='text-lg text-card-foreground '>{element.type}</span>
             </div>
-            <span className='text-sm font-medium text-brand-text-secondary-dark'>{element.percentage}%</span>
+            <span className='text-lg font-medium text-card-foreground'>{element.percentage}%</span>
           </div>
         ))}
       </div>
