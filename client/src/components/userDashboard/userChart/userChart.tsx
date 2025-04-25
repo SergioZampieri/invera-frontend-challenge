@@ -30,10 +30,13 @@ export function UserChart() {
 
   return (
     <section className='flex flex-col gap-20 rounded-2xl md:flex-row md:gap-0 border bg-card p-8'>
+      {/*header de la seccion*/}
       <h2 className='text-title-text text-2xl font-bold'>Statistics</h2>
+        {/*Grafico radial (dona)*/}
       <div className='relative flex h-64 items-center justify-center md:w-1/2'>
         <Donut />
       </div>
+        {/*Leyenda/referencias al grafico*/}
       <div className='m-auto flex w-full max-w-[400px] flex-col justify-center space-y-8'>
         {distributionWithColors.map((element) => (
           <div
